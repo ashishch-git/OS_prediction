@@ -1,0 +1,113 @@
+---
+# Source paths
+Source:
+    paths:
+        source_path_system_1: "/home/ashish/Ashish/MT_UCAN/LC/"
+        source_path_system_2: "/home/ashish/Ashish/MT_UCAN/LC/"
+
+# Selection script config variables
+selection:
+    filenames:
+        path_to_exams_folder_system_1: "/media/ashish/T7 Shield/ucan_lung_cancer"
+        path_to_exams_folder_system_1_2: "/media/ashish/T7 Shield1/UCAN_lymfoma_lung_NWDisc_export"
+        path_to_exams_folder_system_1_3: "/media/ashish/T7 Shield2/ucan_lym_lung_mix_batch6_n324"
+        path_to_exams_folder_system_2: "/media/ashish/T7 Shield/ucan_lung_cancer"
+        path_to_exams_folder_system_2_2: "/media/ashish/T7 Shield1/UCAN_lymfoma_lung_NWDisc_export"
+        path_to_exams_folder_system_2_3: "/media/ashish/T7 Shield2/ucan_lym_lung_mix_batch6_n324"
+
+# Metadata extraction config variables
+metadata:
+    paths:
+        metadata_path: "/Dataframes/Metadata/"
+    filenames:
+        metadata_all_exams_dataframe: "/Dataframes/Metadata/metadata_all_exams.xlsx"
+        metadata_selected_exams_dataframe: "/Dataframes/Metadata/metadata_selected_exams.xlsx"
+    variables:
+        only_selected_exams: True
+
+# Linked date config variables
+linked:
+    paths:
+        linked_path: "/Dataframes/LinkedData/"
+    filenames:
+        final_selected_exams_dataframe: "/Dataframes/LinkedData/Finalized_dataset.xlsx"
+        regression_dataframe: "/Dataframes/LinkedData/Finalized_dataset_exams_with_age.xlsx"
+        classification_dataframe: "/Dataframes/LinkedData/dataset_for_training_366patients_baseline_scans_clinical20231129.xlsx"
+
+# Clinical Data
+clinical:
+    clinical_data_date: "2022-09-16"
+    new_data: "/Dataframes/ClinicalData/UCAN_Lung_prel_2022-09-16_20240326_cleaned2.xlsx"
+
+# Resampling Task config variables
+resampling:
+    path_to_save: "/Resampled_SUV_CT/"
+    voxel_spacing: [2.0364201068878174, 2.0364201068878174, 3.0]
+    image_size: [256,256,256]
+
+# Projection config variables
+projections:
+    paths:
+        raw_projections_path: "/2D_Projections/Raw_projections/"
+        raw_projections_alternative_path: "/2D_Projections/Raw_projections_lean_bone_alternatives/"
+    variables:
+        modality: ["CT", "PT", "SUV"]
+        tissue_type: ["LT", "AT", "LT" , "B" , "N"]
+        projection_type: ["sum", "min", "max", "mean", "std"]
+        angles: [0, 90]
+
+# Collages paths
+collages:
+    paths:
+        raw: "/Collages/Raw_collages/"
+        reshaped: "/Collages/Reshaped_collages/"
+
+# Excel files in the metadata disk
+#path_to_save_dataframes: "/Dataframes/Generated/"
+#distorted_exams_dataframe: "/Dataframes/Generated/exams_with_distorted_images_file.xlsx"
+#exams_ready_for_selection_dataframe: "/Dataframes/Generated/data_ready_for_filtering.xlsx"
+#final_selected_folders_dataframe: "/Dataframes/Generated/Final_Selected_exams_from_U-CAN-Lymfom.xlsx"
+#resampled_SUV_CT_dataframe: "/Dataframes/Generated/resampled_SUV_CT_dataframe.xlsx"
+#raw_projections_dataframe: "/Dataframes/Generated/df_of_raw_projections.xlsx"
+#raw_collages_dataframe: "/Dataframes/Generated/df_of_raw_collages.xlsx"
+#reshaped_collages_dataframe: "/Dataframes/Generated/df_of_reshaped_collages.xlsx"
+#collages_with_nan_arrays_daraframe: "/Dataframes/Generated/df_of_collages_with_nan_arrays.xlsx"
+#collages_without_nan_arrays_daraframe: "/Dataframes/Generated/df_of_collages_without_nan_arrays.xlsx"
+#collages_for_rergession_dataframe: "/Dataframes/Generated/dataset_for_model_regression_training.xlsx"
+#collages_for_classification_dataframe: "/Dataframes/Generated/dataset_for_model_classification_training.xlsx"
+#collages_for_classification_dataframe_new_diagnosis: "/Dataframes/Generated/dataset_for_model_classification_training_new_diagnosis.xlsx"
+
+#new patients
+path_to_save_dataframes: "/Dataframes/Generated/"
+path_to_save_disk1_dataframes: "/Dataframes/Disk1_Generated/"
+path_to_save_disk2_dataframes: "/Dataframes/Disk2_Generated/"
+path_to_save_disk3_dataframes: "/Dataframes/Disk3_Generated/"
+
+all_exams: "/all_exams.xlsx"
+exams_linked_with_clinical_data_raw: "/exams_linked_with_clinical_data_raw.xlsx"
+exams_linked_with_clinical_data_scan_closer_to_diag: "/exams_linked_with_clinical_data_scan_closer_to_diag.xlsx"
+exams_linked_with_clinical_data_remaining_pats_scan_closer_to_consent: "/exams_linked_with_clinical_data_remaining_pats_scan_closer_to_consent.xlsx"
+exams_linked_with_clinical_data_filtered: "/exams_linked_with_clinical_data_filtered_282days.xlsx"
+exams_linked_with_clinical_data: "/exams_linked_with_clinical_data.xlsx"
+distorted_exams_dataframe: "/exams_with_distorted_images_file.xlsx"
+exams_ready_for_selection_dataframe: "/data_ready_for_filtering.xlsx"
+final_selected_folders_dataframe: "/Final_Selected_exams_from_U-CAN-Lymfom.xlsx"
+final_selected_folders_all_data_sources_dataframe: "/Final_Selected_exams_from_U-CAN-Lymfom_all_data_sources.xlsx"
+
+resampled_SUV_CT_dataframe: "/resampled_SUV_CT_dataframe.xlsx"
+raw_projections_dataframe: "/df_of_raw_projections.xlsx"
+raw_collages_dataframe: "/df_of_raw_collages.xlsx"
+reshaped_collages_dataframe: "/df_of_reshaped_collages.xlsx"
+df_pad_or_crop_info_dataframe: "/df_of_reshaped_collages_with_pad_or_crop_info.xlsx"
+
+collages_with_nan_arrays_daraframe: "/df_of_collages_with_nan_arrays.xlsx"
+collages_without_nan_arrays_daraframe: "/df_of_collages_without_nan_arrays.xlsx"
+collages_for_rergession_dataframe: "/dataset_for_model_regression_training.xlsx"
+collages_for_classification_dataframe: "/dataset_for_model_classification_training.xlsx"
+collages_for_classification_dataframe_new_diagnosis: "/dataset_for_model_classification_training_new_diagnosis.xlsx"
+
+# Results Folder
+classification_path: "/Results/Classification"
+regression_path: "/Results/Regression"
+grad_cam_path: "/Results/GradCAM_analysis"
+...
