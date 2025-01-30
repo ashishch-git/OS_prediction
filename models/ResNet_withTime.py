@@ -2,7 +2,6 @@ import torch
 import torch.nn as  nn
 import torch.nn.functional as F
 
-
 class Bottleneck(nn.Module):
     expansion = 4
     def __init__(self, in_channels, out_channels, i_downsample=None, stride=1):
@@ -30,7 +29,6 @@ class Bottleneck(nn.Module):
         x = self.conv3(x)
         x = self.batch_norm3(x)
         
-        #downsample if needed
         if self.i_downsample is not None:
             identity = self.i_downsample(identity)
         #add identity
@@ -68,9 +66,6 @@ class Block(nn.Module):
       x = self.relu(x)
       return x
 
-
-        
-        
 class ResNet(nn.Module):
     def __init__(self, ResBlock, layer_list, num_classes, num_channels=3, num_feature_dim=1):
         super(ResNet, self).__init__()
@@ -87,8 +82,6 @@ class ResNet(nn.Module):
         self.layer4 = self._make_layer(ResBlock, layer_list[3], planes=512, stride=2)
         
         self.avgpool = nn.AdaptiveAvgPool2d((1,1))
-        
-        #self.fc = nn.Linear(512*ResBlock.expansion, num_classes)
 
         self.classifier = nn.Sequential(
             nn.Linear(512*ResBlock.expansion, 512),
@@ -99,11 +92,7 @@ class ResNet(nn.Module):
             nn.Dropout(),
             nn.Linear(128, num_classes),
         )
-        
-        #self.fc = nn.Linear(512*ResBlock.expansion+1, num_classes) #we can increase the size if we want to concatnate more features
-
-        #self.fc = nn.Linear(512*ResBlock.expansion, 512*ResBlock.expansion)
-        #self.fc2 = nn.Linear(512*ResBlock.expansion, num_classes)
+    
         self.leaky_relu = nn.LeakyReLU(negative_slope=0.1)
 
         self.numfeat_fc = nn.Linear(num_feature_dim, 512*ResBlock.expansion)
@@ -113,9 +102,6 @@ class ResNet(nn.Module):
         self.numfeat_fc3 = nn.Linear(512*ResBlock.expansion, 512*ResBlock.expansion)
         
     def forward(self, x, time):
-        # if time==1.0:
-        #    time = torch.tensor(time).cuda()
-
         time = time.to(torch.float32)
         
         x = self.relu(self.batch_norm1(self.conv1(x)))
@@ -150,15 +136,9 @@ class ResNet(nn.Module):
         
         time = self.leaky_relu(time)
 
-        x = x * time  #torch.mul(x, time)
-
-        #x = self.fc(x)
+        x = x * time
 
         x = self.classifier(x)
-
-        #x = self.relu(x)
-
-        #x = self.fc2(x)
         
         return x
         
@@ -180,14 +160,5 @@ class ResNet(nn.Module):
             
         return nn.Sequential(*layers)
 
-        
-        
 def ResNet50_withTime(num_classes, channels=3, num_feature_dim=1):
     return ResNet(Bottleneck, [3,4,6,3], num_classes, channels, num_feature_dim)
-    
-def ResNet101_withTime(num_classes, channels=3, num_feature_dim=1):
-    return ResNet(Bottleneck, [3,4,23,3], num_classes, channels, num_feature_dim)
-
-def ResNet152_withTime(num_classes, channels=3, num_feature_dim=1):
-    return ResNet(Bottleneck, [3,8,36,3], num_classes, channels, num_feature_dim)
-
